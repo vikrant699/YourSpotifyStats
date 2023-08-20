@@ -1,0 +1,40 @@
+.loginBtn {
+  color: #fff;
+  background-color: #1db954;
+  font-size: 14px;
+  /* line-height: 1; */
+  border-radius: 500px;
+  padding: 18px 48px 16px;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  border-width: 0;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background-color: #169241;
+}
+
+.small-btn {
+  color: #fff;
+  background-color: #2ebd59;
+  font-size: 14px;
+  line-height: 1;
+  height: 30px;
+  border-radius: 500px;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  border-width: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 7px 20px 6px;
+}
+
+.small-btn:hover {
+  background-color: #1ed760;
+}
