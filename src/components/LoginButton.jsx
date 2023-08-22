@@ -10,7 +10,8 @@ import { authenticate } from "../store/store";
 
 const LoginButton = () => {
   const dispatch = useDispatch();
-  const [setCookie] = useCookies(["access_token"]);
+  /* eslint-disable */
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const authToken = useSelector((state) => state.auth.auth);
 
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
@@ -67,18 +68,13 @@ const LoginButton = () => {
         if (!response.ok) {
           throw new Error("HTTP status " + response.status);
         }
-
         const data = await response.json();
-        setCookie("access_token", data.access_token, {
-          path: "/",
-          maxAge: 10,
-          sameSite: true,
-        });
+        console.log(data);
         setCookie("refresh_token", data.refresh_token, {
           path: "/",
-          sameSite: true,
+          sameSite: "strict",
         });
-        dispatch(authenticate(data.refresh_token));
+        dispatch(authenticate(data.access_token));
       } catch (err) {
         console.log("Error occurred during fetching access_token: " + err);
       }
@@ -90,12 +86,26 @@ const LoginButton = () => {
     }
   }, [clientId, redirectUri, setCookie, dispatch]);
 
+  const logout = () => {
+    dispatch(authenticate(null));
+    removeCookie("refresh_token");
+  };
+
   return (
     <>
       {!authToken && (
         <button onClick={login} className={styles.loginBtn}>
           Login With Spotify
         </button>
+      )}
+      {authToken && (
+        <>
+          {" "}
+          <button onClick={logout} className={styles.loginBtn}>
+            Logout
+          </button>
+          <p>{authToken}</p>
+        </>
       )}
     </>
   );
