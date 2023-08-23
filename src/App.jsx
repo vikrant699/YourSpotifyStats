@@ -51,9 +51,10 @@ function App() {
     };
   }, [getAccessToken]);
 
-  // Implement auto login with refresh token on app load
-
-  useEffect(() => {}, [setCookie]);
+  useEffect(() => {
+    getAccessToken();
+    /* eslint-disable */
+  }, []);
 
   return (
     <>
