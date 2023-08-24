@@ -1,0 +1,48 @@
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.6rem;
+}
+
+.typewriter {
+  width: 0;
+  animation: typing 1s steps(20, end) forwards,
+    blink-caret 0.75s step-end infinite;
+  border-right: 0.15em solid;
+}
+
+.invisibleText {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.noBorder {
+  border: none !important;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+.container {
+  background-color: red;
+  margin-top: 8vh;
+  width: max-content;
+  height: max-content;
+}

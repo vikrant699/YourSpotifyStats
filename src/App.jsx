@@ -1,8 +1,12 @@
 import { useEffect, useCallback } from "react";
-import LoginButton from "./components/LoginButton";
 import { useCookies } from "react-cookie";
 import { authenticate } from "./store/store";
 import { useDispatch } from "react-redux";
+import NavigationBar from "./pages/NavigationBar";
+import Particles from "react-particles";
+import { loadStarsPreset } from "tsparticles-preset-stars";
+import Hero from "./pages/HomePage/Hero";
+import styles from "./App.module.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,9 +60,29 @@ function App() {
     /* eslint-disable */
   }, []);
 
+  const particlesInit = useCallback(async (engine) => {
+    console.log(engine);
+    await loadStarsPreset(engine);
+  }, []);
+
+  const options = {
+    preset: "stars",
+    particles: {
+      number: {
+        value: window.innerWidth / 5,
+      },
+    },
+  };
+
   return (
     <>
-      <LoginButton />
+      <Particles
+        className={styles.particles}
+        options={options}
+        init={particlesInit}
+      />
+      <NavigationBar />
+      <Hero />
     </>
   );
 }

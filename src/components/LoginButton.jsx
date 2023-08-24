@@ -99,13 +99,9 @@ const LoginButton = () => {
         </button>
       )}
       {authToken && (
-        <>
-          {" "}
-          <button onClick={logout} className={styles.loginBtn}>
-            Logout
-          </button>
-          <p>{authToken}</p>
-        </>
+        <button onClick={logout} className={styles.loginBtn}>
+          Logout
+        </button>
       )}
     </>
   );
