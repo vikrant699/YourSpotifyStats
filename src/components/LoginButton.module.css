@@ -12,8 +12,15 @@
   text-transform: uppercase;
   white-space: normal;
   cursor: pointer;
+  font-family: "Heavy";
 }
 
 .loginBtn:hover {
   background-color: #169241;
+}
+
+@font-face {
+  font-family: "Heavy";
+  src: local("CircularBold"),
+    url("../../assets/fonts/CircularBold.otf") format("truetype");
 }

@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-cookie": "^5.0.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
     "react-particles": "^2.12.2",
     "react-redux": "^8.1.2",
     "tsparticles": "^2.12.0",

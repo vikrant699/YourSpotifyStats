@@ -1,13 +1,14 @@
-.text {
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 1.6rem;
-}
-
 .typewriter {
   width: 0;
   animation: typing 1s steps(20, end) forwards,
     blink-caret 0.75s step-end infinite;
+  border-right: 0.15em solid;
+}
+
+.typewriterMoments {
+  width: 0;
+  animation: typing 1s steps(20, end) forwards,
+    blink-caret-moments 0.75s step-end infinite;
   border-right: 0.15em solid;
 }
 
@@ -36,13 +37,105 @@
     border-color: transparent;
   }
   50% {
+    border-color: #1db954;
+  }
+}
+
+@keyframes blink-caret-moments {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    /* border-color: #fdd835; */
     border-color: white;
   }
 }
 
-.container {
-  background-color: red;
-  margin-top: 8vh;
-  width: max-content;
-  height: max-content;
+@media (min-width: 768px) {
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 5rem;
+    margin: 0;
+    font-weight: bold;
+    color: #1db954;
+  }
+
+  .textMoments {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 5rem;
+    font-family: "Heavy";
+    margin: 0;
+    font-weight: bold;
+    color: white;
+  }
+
+  .container {
+    margin-top: 30vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    width: 70vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .containerText {
+    width: max-content;
+    height: max-content;
+    background-color: black;
+  }
+
+  .lottie {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    color: #1db954;
+  }
+
+  .textMoments {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 3rem;
+    font-family: "Heavy";
+    margin: 0;
+    font-weight: bold;
+    color: white;
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+    margin-top: 15vh;
+    flex-direction: column;
+  }
+
+  .containerText {
+    max-width: max-content;
+    margin-bottom: 5vh;
+    background-color: black;
+  }
+
+  .lottie {
+    align-self: center;
+    width: 50vw;
+    /* display: none; */
+  }
+}
+
+@font-face {
+  font-family: "Heavy";
+  src: local("CircularBold"),
+    url("../../assets/fonts/CircularBold.otf") format("truetype");
 }
