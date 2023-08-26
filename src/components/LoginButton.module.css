@@ -1,5 +1,6 @@
 @media (min-width: 768px) {
   .loginBtn {
+    user-select: none;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
@@ -98,9 +99,11 @@
 @media (max-width: 767px) {
   .mainContainer {
     width: 35vw;
+    user-select: none;
   }
 
   .loginBtn {
+    user-select: none;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
@@ -164,14 +167,16 @@
     border-bottom-right-radius: 20px;
   }
 
-  .profileContainer:hover {
-    background-color: #169241;
+  .contentOpen {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
-  .profileContainer:hover ~ .content {
-    display: flex;
-    visibility: visible;
-    opacity: 1;
+  .profileContainerSelected {
+    background-color: #169241;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .avatar {
@@ -203,11 +208,6 @@
     display: flex;
     visibility: visible;
     opacity: 1;
-  }
-
-  .profileContainerSelected {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 }
 

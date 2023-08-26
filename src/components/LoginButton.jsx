@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   generateRandomString,
   generateCodeChallenge,
@@ -13,6 +13,8 @@ const LoginButton = () => {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const ref = useRef();
   /* eslint-disable */
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const authToken = useSelector((state) => state.auth.auth);
@@ -100,6 +102,7 @@ const LoginButton = () => {
 
         const data = await response.json();
         setUserInfo(data);
+        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -109,6 +112,18 @@ const LoginButton = () => {
       getUserInfo();
     }
   }, [authToken]);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (isClicked && !ref?.current?.contains(event.target)) {
+        setIsClicked(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, [isClicked]);
 
   const logout = () => {
     dispatch(authenticate(null));
@@ -123,6 +138,10 @@ const LoginButton = () => {
     setIsHovered(false);
   };
 
+  const handleClick = () => {
+    setIsClicked((state) => !state);
+  };
+
   return (
     <>
       {!authToken && (
@@ -131,17 +150,19 @@ const LoginButton = () => {
         </button>
       )}
       {authToken && (
-        <div className={styles.mainContainer}>
+        <div className={styles.mainContainer} onClick={handleClick}>
           <div
+            ref={ref}
             onMouseEnter={handleHover}
             onMouseLeave={handleMouseLeave}
             className={`${styles.profileContainer} ${
-              isHovered && styles.profileContainerSelected
+              (isHovered || isClicked) && styles.profileContainerSelected
             }`}
           >
             <img
               src={
-                userInfo?.images[0]?.url !== null
+                userInfo?.images[0]?.url !==
+                "https://scontent-ord5-1.xx.fbcdn.net/v/t1.30497-1/84628273_176159830277856_972693363922829312_n.jpg?stp=c15.0.50.50a_cp0_dst-jpg_p50x50&_nc_cat=1&ccb=1-7&_nc_sid=12b3be&_nc_ohc=KhSDvtF-tNsAX-JVg21&_nc_ht=scontent-ord5-1.xx&edm=AP4hL3IEAAAA&oh=00_AfCRwK8h7ZyzrUjHEzyrXtd9GRCBVlKQW_mO1AIRJ__img&oe=6511C099"
                   ? userInfo?.images[0]?.url
                   : emptyAvatar
               }
@@ -150,7 +171,9 @@ const LoginButton = () => {
             <p className={styles.name}>{userInfo?.display_name}</p>
           </div>
           <ul
-            className={styles.content}
+            className={`${styles.content} ${
+              (isHovered || isClicked) && styles.contentOpen
+            }`}
             onMouseEnter={handleHover}
             onMouseLeave={handleMouseLeave}
           >

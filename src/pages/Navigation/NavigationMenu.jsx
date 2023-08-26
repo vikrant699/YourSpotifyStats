@@ -9,7 +9,7 @@ const NavigationMenu = () => {
 
   useEffect(() => {
     const handler = (event) => {
-      if (navbarOpen && ref.current && !ref.current.contains(event.target)) {
+      if (navbarOpen && !ref?.current?.contains(event.target)) {
         setNavbarOpen(false);
       }
     };
