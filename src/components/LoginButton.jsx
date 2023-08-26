@@ -7,6 +7,7 @@ import styles from "./LoginButton.module.css";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../store/store";
+import emptyAvatar from "../assets/images/emptyAvatar.webp";
 
 const LoginButton = () => {
   const dispatch = useDispatch();
@@ -138,7 +139,14 @@ const LoginButton = () => {
               isHovered && styles.profileContainerSelected
             }`}
           >
-            <img src={userInfo?.images[0]?.url} className={styles.avatar} />
+            <img
+              src={
+                userInfo?.images[0]?.url !== null
+                  ? userInfo?.images[0]?.url
+                  : emptyAvatar
+              }
+              className={styles.avatar}
+            />
             <p className={styles.name}>{userInfo?.display_name}</p>
           </div>
           <ul
