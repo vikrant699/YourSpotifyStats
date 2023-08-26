@@ -78,7 +78,8 @@
     border-bottom-right-radius: 30px;
   }
 
-  li {
+  .spotifyProfile,
+  .logout {
     cursor: pointer;
   }
 
@@ -140,17 +141,16 @@
     justify-content: space-around;
   }
 
-  ul {
-    text-align: center;
-  }
-
-  li {
+  .spotifyProfile,
+  .logout {
     font-size: 12px;
     width: 100%;
   }
 
-  li:hover,
-  li:active {
+  .logout:hover,
+  .logout:active,
+  .spotifyProfile:hover,
+  .spotifyProfile:active {
     background-color: #1db954;
   }
 
@@ -177,6 +177,7 @@
   }
 
   .content {
+    text-align: center;
     display: none;
     flex-direction: column;
     list-style-type: none;
