@@ -17,12 +17,12 @@
   justify-content: center;
 }
 
-.navBar li {
+.navBarLi {
   color: white;
   margin: 20px;
   z-index: 10;
 }
 
-.navbar li a {
+.navbarLiA {
   text-decoration: none;
 }

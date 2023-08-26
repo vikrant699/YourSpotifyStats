@@ -4,11 +4,11 @@ import styles from "./NavigationBar.module.css";
 const NavigationBar = () => {
   return (
     <nav className={styles.navBar}>
-      <li>Top Playlists</li>
-      <li>Top Songs</li>
-      <li>Top Artists</li>
-      <li>Top Whatever</li>
-      <li>
+      <li className={styles.navBarLi}>Top Playlists</li>
+      <li className={styles.navBarLi}>Top Songs</li>
+      <li className={styles.navBarLi}>Top Artists</li>
+      <li className={styles.navBarLi}>Top Whatever</li>
+      <li className={styles.navBarLi}>
         <LoginButton />
       </li>
     </nav>
