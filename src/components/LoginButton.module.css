@@ -19,6 +19,29 @@
   background-color: #169241;
 }
 
+@media (max-width: 767px) {
+  .loginBtn {
+    color: #fff;
+    background-color: #1db954;
+    font-size: 10px;
+    border-radius: 200px;
+    padding: 18px 25px 16px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    min-width: 100px;
+    text-transform: uppercase;
+    white-space: normal;
+    cursor: pointer;
+    font-family: "Heavy";
+  }
+
+  .loginBtn:hover {
+    background-color: #169241;
+  }
+}
+
 @font-face {
   font-family: "Heavy";
   src: local("CircularBold"),

@@ -2,11 +2,12 @@ import { useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { authenticate } from "./store/store";
 import { useDispatch } from "react-redux";
-import NavigationBar from "./pages/NavigationBar";
+import NavigationBar from "./pages/Navigation/NavigationBar";
 import Particles from "react-particles";
 import { loadStarsPreset } from "tsparticles-preset-stars";
 import Hero from "./pages/HomePage/Hero";
 import styles from "./App.module.css";
+import NavigationMenu from "./pages/Navigation/NavigationMenu";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,7 +82,7 @@ function App() {
         options={options}
         init={particlesInit}
       />
-      <NavigationBar />
+      {window.innerWidth > 768 ? <NavigationBar /> : <NavigationMenu />}
       <Hero />
     </>
   );

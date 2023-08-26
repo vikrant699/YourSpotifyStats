@@ -52,7 +52,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .text {
     overflow: hidden;
     white-space: nowrap;
@@ -94,6 +94,48 @@
   }
 }
 
+@media (max-width: 1199.98px) {
+  .text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+    color: #1db954;
+  }
+
+  .textMoments {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 3rem;
+    font-family: "Heavy";
+    margin: 0;
+    font-weight: bold;
+    color: white;
+  }
+
+  .container {
+    margin-top: 20vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    width: 70vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .containerText {
+    width: max-content;
+    height: max-content;
+    background-color: black;
+  }
+
+  .lottie {
+    width: 13rem;
+  }
+}
+
 @media (max-width: 767px) {
   .text {
     overflow: hidden;
@@ -128,8 +170,10 @@
   }
 
   .lottie {
+    position: relative;
     align-self: center;
     width: 50vw;
+    z-index: -10;
     /* display: none; */
   }
 }
