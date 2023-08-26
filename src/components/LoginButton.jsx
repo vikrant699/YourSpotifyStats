@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   generateRandomString,
   generateCodeChallenge,
@@ -10,6 +10,8 @@ import { authenticate } from "../store/store";
 
 const LoginButton = () => {
   const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
   /* eslint-disable */
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const authToken = useSelector((state) => state.auth.auth);
@@ -69,26 +71,55 @@ const LoginButton = () => {
           throw new Error("HTTP status " + response.status);
         }
         const data = await response.json();
-        console.log(data);
         setCookie("refresh_token", data.refresh_token, {
           path: "/",
           sameSite: "strict",
         });
         dispatch(authenticate(data.access_token));
       } catch (err) {
-        console.log("Error occurred during fetching access_token: " + err);
+        console.log(err);
       }
     };
 
-    if (localStorage.getItem("code_verifier") !== null) {
+    if (localStorage.getItem("code_verifier") !== null && !authToken) {
       getAccessToken();
       localStorage.removeItem("code_verifier");
     }
   }, [clientId, redirectUri, setCookie, dispatch]);
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const response = await fetch("https://api.spotify.com/v1/me", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+
+        const data = await response.json();
+        setUserInfo(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (authToken) {
+      getUserInfo();
+    }
+  }, [authToken]);
+
   const logout = () => {
     dispatch(authenticate(null));
     removeCookie("refresh_token");
+  };
+
+  const handleHover = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
   return (
@@ -99,9 +130,30 @@ const LoginButton = () => {
         </button>
       )}
       {authToken && (
-        <button onClick={logout} className={styles.loginBtn}>
-          Logout
-        </button>
+        <div className={styles.mainContainer}>
+          <div
+            onMouseEnter={handleHover}
+            onMouseLeave={handleMouseLeave}
+            className={`${styles.profileContainer} ${
+              isHovered && styles.profileContainerSelected
+            }`}
+          >
+            <img src={userInfo?.images[0]?.url} className={styles.avatar} />
+            <p>{userInfo?.display_name}</p>
+          </div>
+          <ul
+            className={styles.content}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleMouseLeave}
+          >
+            <li className={styles.spotifyProfile}>
+              <p>My Spotify Profile</p>
+            </li>
+            <li onClick={logout} className={styles.logout}>
+              <p>Logout</p>
+            </li>
+          </ul>
+        </div>
       )}
     </>
   );

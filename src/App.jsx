@@ -45,6 +45,8 @@ function App() {
       } catch (err) {
         console.log("Error occurred during fetching access_token: " + err);
       }
+    } else {
+      return;
     }
   }, [refreshToken, setCookie, dispatch, clientId]);
 
@@ -61,8 +63,17 @@ function App() {
     /* eslint-disable */
   }, []);
 
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserInfo();
+  }, []);
+
   const particlesInit = useCallback(async (engine) => {
-    console.log(engine);
     await loadStarsPreset(engine);
   }, []);
 
