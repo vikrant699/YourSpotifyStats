@@ -126,7 +126,7 @@ const LoginButton = () => {
     <>
       {!authToken && (
         <button onClick={login} className={styles.loginBtn}>
-          {redirectUri}
+          Login
         </button>
       )}
       {authToken && (
