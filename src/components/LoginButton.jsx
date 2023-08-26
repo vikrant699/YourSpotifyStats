@@ -7,7 +7,6 @@ import styles from "./LoginButton.module.css";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticate } from "../store/store";
-import { BsSpotify } from "react-icons/bs";
 
 const LoginButton = () => {
   const dispatch = useDispatch();
@@ -96,7 +95,6 @@ const LoginButton = () => {
     <>
       {!authToken && (
         <button onClick={login} className={styles.loginBtn}>
-          <BsSpotify style={{ display: "none" }} />
           Login
         </button>
       )}
