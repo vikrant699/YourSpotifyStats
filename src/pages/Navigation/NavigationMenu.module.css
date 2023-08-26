@@ -9,7 +9,7 @@
 }
 
 .navbar {
-  height: 60px;
+  height: 8vh;
   background-color: rgba(0, 0, 0, 0.9);
   position: relative;
 }
@@ -23,10 +23,10 @@
   .navElements {
     position: absolute;
     left: 0;
-    top: 60px;
-    background-color: rgba(0, 0, 0, 0.9);
+    top: 8vh;
+    background-color: rgba(0, 0, 0, 0.95);
     width: 0px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 8vh);
     transition: all 0.3s ease-in;
     overflow: hidden;
     white-space: nowrap;

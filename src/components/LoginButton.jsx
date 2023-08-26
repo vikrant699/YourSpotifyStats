@@ -126,7 +126,7 @@ const LoginButton = () => {
     <>
       {!authToken && (
         <button onClick={login} className={styles.loginBtn}>
-          Login
+          {redirectUri}
         </button>
       )}
       {authToken && (
@@ -139,7 +139,7 @@ const LoginButton = () => {
             }`}
           >
             <img src={userInfo?.images[0]?.url} className={styles.avatar} />
-            <p>{userInfo?.display_name}</p>
+            <p className={styles.name}>{userInfo?.display_name}</p>
           </div>
           <ul
             className={styles.content}

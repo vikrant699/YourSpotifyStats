@@ -1,25 +1,25 @@
-.loginBtn {
-  color: #fff;
-  background-color: #1db954;
-  font-size: 14px;
-  border-radius: 30px;
-  padding: 18px 48px 16px;
-  transition-property: background-color;
-  transition-duration: 0.3s;
-  border-width: 0;
-  letter-spacing: 2px;
-  min-width: 160px;
-  text-transform: uppercase;
-  white-space: normal;
-  cursor: pointer;
-  font-family: "Heavy";
-}
-
-.loginBtn:hover {
-  background-color: #169241;
-}
-
 @media (min-width: 768px) {
+  .loginBtn {
+    color: #fff;
+    background-color: #1db954;
+    font-size: 14px;
+    border-radius: 30px;
+    padding: 18px 48px 16px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    cursor: pointer;
+    font-family: "Heavy";
+  }
+
+  .loginBtn:hover {
+    background-color: #169241;
+  }
+
   .mainContainer {
     background-color: red;
     display: flex;
@@ -103,9 +103,9 @@
   .loginBtn {
     color: #fff;
     background-color: #1db954;
-    font-size: 10px;
+    font-size: 14px;
     border-radius: 20px;
-    padding: 18px 25px 16px;
+    padding: 14px 20px 12px;
     transition-property: background-color;
     transition-duration: 0.3s;
     border-width: 0;
@@ -121,13 +121,17 @@
     background-color: #169241;
   }
 
+  .name {
+    margin: 2px 10px 0px;
+  }
+
   .profileContainer {
     display: flex;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
     border-radius: 20px;
-    padding: 2px 0px 0px;
+    padding: 10px 10px 10px;
     transition-property: background-color;
     transition-duration: 0.3s;
     border-width: 0;
@@ -171,6 +175,7 @@
   }
 
   .avatar {
+    margin-left: 10px;
     max-width: 20%;
     height: auto;
     border-radius: 100%;
