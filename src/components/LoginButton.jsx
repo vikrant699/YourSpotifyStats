@@ -161,8 +161,7 @@ const LoginButton = () => {
           >
             <img
               src={
-                userInfo?.images[0]?.url !==
-                "https://scontent-ord5-1.xx.fbcdn.net/v/t1.30497-1/84628273_176159830277856_972693363922829312_n.jpg?stp=c15.0.50.50a_cp0_dst-jpg_p50x50&_nc_cat=1&ccb=1-7&_nc_sid=12b3be&_nc_ohc=KhSDvtF-tNsAX-JVg21&_nc_ht=scontent-ord5-1.xx&edm=AP4hL3IEAAAA&oh=00_AfCRwK8h7ZyzrUjHEzyrXtd9GRCBVlKQW_mO1AIRJ__img&oe=6511C099"
+                userInfo?.images[0]?.url.includes("scdn.co")
                   ? userInfo?.images[0]?.url
                   : emptyAvatar
               }
@@ -170,20 +169,30 @@ const LoginButton = () => {
             />
             <p className={styles.name}>{userInfo?.display_name}</p>
           </div>
-          <ul
-            className={`${styles.content} ${
-              (isHovered || isClicked) && styles.contentOpen
-            }`}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleMouseLeave}
-          >
-            <li className={styles.spotifyProfile}>
-              <p>My Spotify Profile</p>
-            </li>
-            <li onClick={logout} className={styles.logout}>
-              <p>Logout</p>
-            </li>
-          </ul>
+          <div>
+            <ul
+              className={`${styles.content} ${
+                (isHovered || isClicked) && styles.contentOpen
+              }`}
+              onMouseEnter={handleHover}
+              onMouseLeave={handleMouseLeave}
+            >
+              <li className={styles.spotifyProfile}>
+                <p>
+                  <a
+                    className={styles.links}
+                    target="_blank"
+                    href={userInfo?.external_urls?.spotify}
+                  >
+                    My Spotify Profile
+                  </a>
+                </p>
+              </li>
+              <li onClick={logout} className={styles.logout}>
+                <p>Logout</p>
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </>

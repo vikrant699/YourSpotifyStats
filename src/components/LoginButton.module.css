@@ -1,10 +1,15 @@
-@media (min-width: 768px) {
+.links {
+  text-decoration: none;
+  color: white;
+}
+
+@media (min-width: 1080px) {
   .loginBtn {
     user-select: none;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 18px 48px 16px;
     transition-property: background-color;
     transition-duration: 0.3s;
@@ -22,18 +27,20 @@
   }
 
   .mainContainer {
-    background-color: red;
+    margin-top: 10.3vh;
+    position: relative;
     display: flex;
     flex-direction: column;
   }
 
   .profileContainer {
+    width: 6vw;
     display: flex;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
-    border-radius: 30px;
-    padding: 18px 16px 16px;
+    border-radius: 20px;
+    padding: 2px 16px 0px;
     transition-property: background-color;
     transition-duration: 0.3s;
     border-width: 0;
@@ -42,62 +49,189 @@
     white-space: normal;
     cursor: pointer;
     font-family: "Heavy";
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-  }
-
-  .profileContainer:hover {
-    background-color: #169241;
-  }
-
-  .profileContainer:hover ~ .content {
-    display: flex;
-    visibility: visible;
-    opacity: 1;
   }
 
   .avatar {
     width: 1.5vw;
     vertical-align: middle;
     border-radius: 100%;
+    margin-top: -2px;
+  }
+
+  .name {
+    margin-left: 0.5vw;
   }
 
   .content {
-    display: none;
+    display: flex;
+    width: 6vw;
     flex-direction: column;
+    visibility: hidden;
+    opacity: 1;
     list-style-type: none;
     margin: 0;
-    position: absolute;
-    background-color: rgb(56, 56, 56);
+    background-color: black;
     align-items: center;
-    min-width: 160px;
-    gap: 0;
-    padding: 18px 16px 16px;
-    opacity: 0;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    text-align: center;
+    width: 100%;
+    padding: 0;
   }
 
   .spotifyProfile,
   .logout {
+    font-size: 14px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     cursor: pointer;
   }
 
-  .content:hover {
-    display: flex;
+  .spotifyProfile:hover,
+  .spotifyProfile:active {
+    background-color: #1db954;
+  }
+
+  .logout:hover,
+  .logout:active {
+    background-color: red;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .contentOpen {
     visibility: visible;
     opacity: 1;
+    margin: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
   .profileContainerSelected {
+    background-color: #169241;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 }
 
+/* TABLET ONLY */
+
+@media (min-width: 768px) and (max-width: 1079px) {
+  .loginBtn {
+    user-select: none;
+    color: #fff;
+    background-color: #1db954;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 18px 48px 16px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    cursor: pointer;
+    font-family: "Heavy";
+  }
+
+  .loginBtn:hover {
+    background-color: #169241;
+  }
+
+  .mainContainer {
+    margin-top: 7.7vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profileContainer {
+    width: 12.5vw;
+    display: flex;
+    color: #fff;
+    background-color: #1db954;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 2px 16px 0px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    cursor: pointer;
+    font-family: "Heavy";
+    align-items: center;
+  }
+
+  .avatar {
+    width: 3vw;
+    vertical-align: middle;
+    border-radius: 100%;
+    margin-top: -2px;
+  }
+
+  .name {
+    margin-left: 0.5vw;
+  }
+
+  .content {
+    display: flex;
+    width: 6vw;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 1;
+    list-style-type: none;
+    margin: 0;
+    background-color: black;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .spotifyProfile,
+  .logout {
+    font-size: 13px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .spotifyProfile:hover,
+  .spotifyProfile:active {
+    background-color: #1db954;
+  }
+
+  .logout:hover,
+  .logout:active {
+    background-color: red;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .contentOpen {
+    visibility: visible;
+    opacity: 1;
+    margin: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .profileContainerSelected {
+    background-color: #169241;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+/* Mobile Only */
+
 @media (max-width: 767px) {
   .mainContainer {
+    margin-top: 0.5vh;
     width: 35vw;
     user-select: none;
   }
@@ -154,15 +288,12 @@
     width: 100%;
   }
 
-  .logout:hover,
-  .logout:active,
-  .spotifyProfile:hover,
   .spotifyProfile:active {
     background-color: #1db954;
   }
 
-  .logout:hover,
   .logout:active {
+    background-color: red;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
@@ -192,22 +323,15 @@
     flex-direction: column;
     list-style-type: none;
     margin: 0;
-    background-color: rgb(56, 56, 56);
+    background-color: black;
     position: absolute;
     width: 35vw;
     align-items: center;
-    /* min-width: 160px; */
     gap: 0;
     padding: 2px 0px 0px;
     opacity: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-  }
-
-  .content:hover {
-    display: flex;
-    visibility: visible;
-    opacity: 1;
   }
 }
 

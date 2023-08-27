@@ -12,12 +12,9 @@
   justify-content: center;
 }
 
-.navBar * {
+.navBarLi {
   display: inline;
   justify-content: center;
-}
-
-.navBarLi {
   color: white;
   margin: 20px;
   z-index: 10;
