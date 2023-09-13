@@ -1,6 +1,6 @@
 .navBar {
   background-color: #00000000;
-  backdrop-filter: blur(22px);
+  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
   left: 0;
