@@ -5,7 +5,7 @@ import NavigationMenu from "./NavigationMenu";
 const Navigation = () => {
   return (
     <>
-      {window.innerWidth > 768 ? <NavigationBar /> : <NavigationMenu />}
+      {window.innerWidth > 830 ? <NavigationBar /> : <NavigationMenu />}
       <Outlet />
     </>
   );

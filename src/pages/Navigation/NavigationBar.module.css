@@ -13,13 +13,50 @@
 }
 
 .navBarLi {
+  text-align: center;
+  display: inline;
+  justify-content: center;
+  color: white;
+  margin: 36px;
+  z-index: 10;
+  text-decoration: none;
+}
+
+.navBarLi:hover {
+  text-align: center;
   display: inline;
   justify-content: center;
   color: white;
   margin: 20px;
   z-index: 10;
+  text-decoration: none;
+  background-color: #1db954;
+  padding: 10px 16px 8px;
+  border-radius: 12px;
 }
 
 .navbarLiA {
+  text-decoration: none;
+}
+
+.navLinkActive {
+  text-align: center;
+  display: inline;
+  justify-content: center;
+  color: white;
+  margin: 20px;
+  z-index: 10;
+  text-decoration: none;
+  background-color: #1db954;
+  padding: 10px 16px 8px;
+  border-radius: 12px;
+}
+
+.navBarLogin {
+  display: inline;
+  justify-content: center;
+  color: white;
+  margin: 30px;
+  z-index: 10;
   text-decoration: none;
 }

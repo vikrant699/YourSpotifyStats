@@ -14,7 +14,7 @@
   position: relative;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 830px) {
   .menuIcon {
     display: block;
     cursor: pointer;
