@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialAuthState = { auth: null };
+const initialAuthState = { auth: false };
 
 const authSlice = createSlice({
   name: "auth",
