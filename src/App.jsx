@@ -2,13 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navigation from "./pages/Navigation/Navigation";
 import HomePage from "./pages/HomePage/HomePage";
 import YourTopSongs from "./pages/YourTopSongs/YourTopSongs";
-import { getUserTopItems } from "./loaders/loaders";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigation />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -17,7 +17,6 @@ const router = createBrowserRouter([
       {
         path: "topSongs",
         element: <YourTopSongs />,
-        loader: getUserTopItems,
       },
     ],
   },

@@ -1,14 +1,83 @@
-import { useLoaderData } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { useCookies } from "react-cookie";
 
-const YourTopSongs = () => {
-  const topItems = useLoaderData();
-  console.log(topItems);
+function YourTopSongs() {
+  const [items, setItems] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  /* eslint-disable */
+  const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
+  const authToken = cookies.auth_token;
+
+  const fetchItems = useCallback(async () => {
+    if (!hasMore) {
+      return; // No more items to fetch, so exit
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/me/top/tracks?limit=20&offset=${offset}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      const newItems = await data.items;
+
+      if (newItems.length === 0) {
+        setHasMore(false); // No more items to fetch
+      } else {
+        setItems([...items, ...newItems]);
+        setOffset(offset + 20);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setLoading(false);
+  }, [offset, items]);
+
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
+
+  const handleScroll = useCallback(() => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      // User has scrolled to the bottom
+      if (!loading) {
+        fetchItems();
+      }
+    }
+  }, [fetchItems, loading]);
+
+  useEffect(() => {
+    if (!hasMore || loading) {
+      return;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [loading, hasMore, handleScroll]);
 
   return (
-    <>
-      <h1>{topItems.href}</h1>
-    </>
+    <div>
+      {items.map((item, index) => (
+        <h1 key={index}>
+          {index} {item.name}
+        </h1>
+      ))}
+      {loading && <p>Loading...</p>}
+      {!hasMore && <p>No more items to fetch.</p>}
+    </div>
   );
-};
-
+}
 export default YourTopSongs;

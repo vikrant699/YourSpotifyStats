@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { login } from "../helpers/SpotifyLogin";
-import styles from "./LoginButton.module.css";
 import { useCookies } from "react-cookie";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loginHelper } from "../helpers/SpotifyLogin";
+import styles from "./LoginButton.module.css";
 import { authenticate } from "../store/store";
 import emptyAvatar from "../assets/images/emptyAvatar.webp";
 
@@ -15,7 +15,6 @@ const LoginButton = () => {
   /* eslint-disable */
   const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
   const authToken = cookies.auth_token;
-  const auth = useSelector((state) => state.auth.auth);
 
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const redirectUri = import.meta.env.VITE_DOMAIN;
@@ -48,10 +47,10 @@ const LoginButton = () => {
         }
         const data = await response.json();
         setCookie("refresh_token", data.refresh_token, {
-          path: "/",
+          pathname: "/",
         });
         setCookie("auth_token", data.access_token, {
-          path: "/",
+          pathname: "/",
           maxAge: 3600,
         });
         dispatch(authenticate(true));
@@ -123,7 +122,7 @@ const LoginButton = () => {
   return (
     <>
       {!authToken && (
-        <button onClick={login} className={styles.loginBtn}>
+        <button onClick={loginHelper} className={styles.loginBtn}>
           Login
         </button>
       )}

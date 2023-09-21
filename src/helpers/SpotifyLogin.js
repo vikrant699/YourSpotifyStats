@@ -24,7 +24,7 @@ const generateCodeChallenge = async (codeVerifier) => {
   return base64encode(digest);
 };
 
-export const login = async () => {
+export const loginHelper = async () => {
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const redirectUri = import.meta.env.VITE_DOMAIN;
   let codeVerifier = generateRandomString(128);
