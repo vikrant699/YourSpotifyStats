@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Hero.module.css";
-import { Player } from "@lottiefiles/react-lottie-player";
+import Lottie from "lottie-react";
 import animation from "../../assets/animations/animation4.json";
 
 const Hero = () => {
@@ -31,7 +31,12 @@ const Hero = () => {
           Your moments.
         </p>
       </div>
-      <Player className={styles.lottie} src={animation} autoplay loop />
+      <Lottie
+        className={styles.lottie}
+        animationData={animation}
+        autoplay
+        loop
+      />
     </div>
   );
 };

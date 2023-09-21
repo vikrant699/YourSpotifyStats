@@ -1,0 +1,17 @@
+.particles {
+  position: absolute;
+  z-index: -10;
+}
+
+.firstContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 12vh;
+}
+
+.innerContainer {
+  width: max-content;
+  background-color: rgb(24, 24, 24);
+  padding: 10px;
+  border-radius: 10px;
+}

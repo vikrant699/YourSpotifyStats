@@ -1,83 +1,49 @@
-import { useState, useEffect, useCallback } from "react";
-import { useCookies } from "react-cookie";
+import { useCallback } from "react";
+import Particles from "react-particles";
+import { loadStarsPreset } from "tsparticles-preset-stars";
+import useTopItems from "../../customHooks/useTopItems";
+import ListItem from "../../components/ListItem";
+import styles from "./YourTopSongs.module.css";
 
 function YourTopSongs() {
-  const [items, setItems] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  /* eslint-disable */
-  const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
-  const authToken = cookies.auth_token;
+  const apiEndpoint = "https://api.spotify.com/v1/me/top/tracks";
+  const { items, loading, hasMore } = useTopItems(apiEndpoint);
 
-  const fetchItems = useCallback(async () => {
-    if (!hasMore) {
-      return; // No more items to fetch, so exit
-    }
+  const particlesInit = useCallback(async (engine) => {
+    await loadStarsPreset(engine);
+  }, []);
 
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `https://api.spotify.com/v1/me/top/tracks?limit=20&offset=${offset}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-      const newItems = await data.items;
-
-      if (newItems.length === 0) {
-        setHasMore(false); // No more items to fetch
-      } else {
-        setItems([...items, ...newItems]);
-        setOffset(offset + 20);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-    setLoading(false);
-  }, [offset, items]);
-
-  useEffect(() => {
-    fetchItems();
-  }, [fetchItems]);
-
-  const handleScroll = useCallback(() => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
-      // User has scrolled to the bottom
-      if (!loading) {
-        fetchItems();
-      }
-    }
-  }, [fetchItems, loading]);
-
-  useEffect(() => {
-    if (!hasMore || loading) {
-      return;
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [loading, hasMore, handleScroll]);
+  const options = {
+    preset: "stars",
+    particles: {
+      number: {
+        value: window.innerWidth / 5,
+      },
+    },
+  };
 
   return (
-    <div>
-      {items.map((item, index) => (
-        <h1 key={index}>
-          {index} {item.name}
-        </h1>
-      ))}
-      {loading && <p>Loading...</p>}
-      {!hasMore && <p>No more items to fetch.</p>}
-    </div>
+    <>
+      <Particles
+        className={styles.particles}
+        options={options}
+        init={particlesInit}
+      />
+      <div className={styles.firstContainer}>
+        <div className={styles.innerContainer}>
+          {items.map((item, index) => (
+            <ListItem
+              key={index}
+              name={item.name}
+              previewUrl={item.preview_url}
+              isTrack={true}
+            />
+          ))}
+          {loading && <p>Loading...</p>}
+          {!hasMore && <p>No more items to fetch.</p>}
+        </div>
+      </div>
+    </>
   );
 }
 export default YourTopSongs;
