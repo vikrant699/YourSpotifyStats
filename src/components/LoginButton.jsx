@@ -13,7 +13,7 @@ const LoginButton = () => {
   const [isClicked, setIsClicked] = useState(false);
   const ref = useRef();
   /* eslint-disable */
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
   const authToken = cookies.auth_token;
   const auth = useSelector((state) => state.auth.auth);
 
@@ -60,7 +60,7 @@ const LoginButton = () => {
       }
     };
 
-    if (localStorage.getItem("code_verifier") !== null && !authToken) {
+    if (localStorage.getItem("code_verifier") !== null) {
       getAccessToken();
       localStorage.removeItem("code_verifier");
     }
@@ -68,18 +68,20 @@ const LoginButton = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      try {
-        const response = await fetch("https://api.spotify.com/v1/me", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+      if (!userInfo) {
+        try {
+          const response = await fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          });
 
-        const data = await response.json();
-        setUserInfo(data);
-      } catch (err) {
-        console.log(err);
+          const data = await response.json();
+          setUserInfo(data);
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
@@ -120,12 +122,12 @@ const LoginButton = () => {
 
   return (
     <>
-      {!auth && (
+      {!authToken && (
         <button onClick={login} className={styles.loginBtn}>
           Login
         </button>
       )}
-      {auth && (
+      {authToken && (
         <div className={styles.mainContainer} onClick={handleClick}>
           <div
             ref={ref}
@@ -143,7 +145,9 @@ const LoginButton = () => {
               }
               className={styles.avatar}
             />
-            <p className={styles.name}>{userInfo?.display_name}</p>
+            <p className={styles.name}>
+              {userInfo?.display_name ? userInfo?.display_name : "NoName"}
+            </p>
           </div>
           <div>
             <ul

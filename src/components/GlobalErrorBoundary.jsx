@@ -1,16 +1,17 @@
-import { useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { authenticate } from "../store/store";
 
 function GlobalErrorBoundary({ children }) {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(["refresh_token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["refresh_token"]);
   const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
   const refreshToken = cookies.refresh_token;
+  const auth = useSelector((state) => state.auth.auth);
 
-  const handleGlobalError = useCallback(
-    async (error) => {
+  useEffect(() => {
+    const handleGlobalError = async (error) => {
       if (refreshToken) {
         if (error.response && error.response.status === 401) {
           console.log("refreshing token");
@@ -47,25 +48,24 @@ function GlobalErrorBoundary({ children }) {
           } catch (err) {
             console.log("Error occurred during fetching access_token: " + err);
           }
-        } else {
-          dispatch(authenticate(false));
         }
+      } else {
+        dispatch(authenticate(false));
+        removeCookie("refresh_token");
+        removeCookie("auth_token");
       }
-    },
-    [refreshToken, clientId, setCookie, dispatch]
-  );
-
-  useEffect(() => {
+    };
     window.addEventListener("error", handleGlobalError);
     return () => {
       window.removeEventListener("error", handleGlobalError);
     };
-  }, [handleGlobalError]);
+  }, [clientId, dispatch, refreshToken, setCookie, removeCookie]);
 
   useEffect(() => {
-    handleGlobalError();
-    /* eslint-disable */
-  }, []);
+    if (cookies.auth_token && !auth) {
+      dispatch(authenticate(true));
+    }
+  }, [cookies, dispatch, auth]);
 
   return <>{children}</>;
 }
