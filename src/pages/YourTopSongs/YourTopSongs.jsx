@@ -8,6 +8,7 @@ import styles from "./YourTopSongs.module.css";
 function YourTopSongs() {
   const apiEndpoint = "https://api.spotify.com/v1/me/top/tracks";
   const { items, loading, hasMore } = useTopItems(apiEndpoint);
+  console.log(items);
 
   const particlesInit = useCallback(async (engine) => {
     await loadStarsPreset(engine);
@@ -33,14 +34,17 @@ function YourTopSongs() {
         <div className={styles.innerContainer}>
           {items.map((item, index) => (
             <ListItem
+              albumLink={item.album.external_urls.spotify}
+              musicLink={item.external_urls.spotify}
+              imgSrc={item.album.images[1].url}
               key={index}
               name={item.name}
+              artists={item.artists}
               previewUrl={item.preview_url}
               isTrack={true}
             />
           ))}
           {loading && <p>Loading...</p>}
-          {!hasMore && <p>No more items to fetch.</p>}
         </div>
       </div>
     </>

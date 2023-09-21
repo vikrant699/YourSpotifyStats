@@ -2,21 +2,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(37, 37, 37);
-  padding: 20px 60px 20px;
-  width: 50vw;
-  height: 8vh;
+  padding: 20px 3vw 20px;
+  width: 30vw;
+  height: 2vh;
   margin: 10px;
   border-radius: 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.artistContainer {
+  display: flex;
+  margin-left: 1vw;
+}
+
+.albumArt {
+  height: 40px;
+  width: 40px;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .name {
+  font-size: 14px;
+  margin-left: 1vw;
+  margin-bottom: 3px;
+}
+
+.artist {
+  font-size: 10px;
+  margin-top: 0;
 }
 
 .lottieContainer {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   border-style: solid;
   border-width: 2px;
@@ -34,4 +56,14 @@
 .lottie {
   width: 50px;
   margin-top: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.name:hover,
+.artist:hover {
+  text-decoration: underline;
 }

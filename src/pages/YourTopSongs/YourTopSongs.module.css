@@ -11,7 +11,7 @@
 
 .innerContainer {
   width: max-content;
-  background-color: rgb(24, 24, 24);
+  /* background-color: rgb(24, 24, 24); */
   padding: 10px;
   border-radius: 10px;
 }

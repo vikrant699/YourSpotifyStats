@@ -4,7 +4,15 @@ import styles from "./ListItem.module.css";
 import playAnimation from "../assets/animations/playAnimation.json";
 import pauseAnimation from "../assets/animations/pauseAnimation.json";
 
-const ListItem = ({ name, previewUrl, isTrack }) => {
+const ListItem = ({
+  name,
+  musicLink,
+  albumLink,
+  artists,
+  imgSrc,
+  previewUrl,
+  isTrack,
+}) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,7 +57,26 @@ const ListItem = ({ name, previewUrl, isTrack }) => {
 
   return (
     <div className={styles.listItemContainer}>
-      <p className={styles.name}>{name}</p>
+      <div className={styles.infoContainer}>
+        <a href={albumLink}>
+          <img src={imgSrc} className={styles.albumArt} />
+        </a>
+
+        <div>
+          <a href={musicLink}>
+            <p className={styles.name}>{name}</p>
+          </a>
+          <div className={styles.artistContainer}>
+            {artists.map((artist, index) => (
+              <a href={artist.external_urls.spotify} key={index}>
+                <p className={styles.artist}>
+                  {index < artists.length - 1 ? `${artist.name},` : artist.name}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
       {isTrack ? (
         <div className={styles.lottieContainer}>
           {isPlaying && isLoaded ? (
