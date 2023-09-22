@@ -1,9 +1,28 @@
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadStarsPreset } from "tsparticles-preset-stars";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 import useTopItems from "../../customHooks/useTopItems";
 import ListItem from "../../components/ListItem";
 import styles from "./YourTopSongs.module.css";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function YourTopSongs() {
   const apiEndpoint = "https://api.spotify.com/v1/me/top/tracks";
@@ -14,7 +33,7 @@ function YourTopSongs() {
     await loadStarsPreset(engine);
   }, []);
 
-  const options = {
+  const particleOptions = {
     preset: "stars",
     particles: {
       number: {
@@ -23,14 +42,51 @@ function YourTopSongs() {
     },
   };
 
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Populatity of Top 10 Tracks",
+      },
+    },
+  };
+
+  const chartLabels = items.slice(0, 10).map((obj) => obj.name);
+
+  const chartData = {
+    labels: chartLabels,
+    datasets: [
+      {
+        label: "Track's Popularity",
+        data: items.slice(0, 10).map((obj) => obj.popularity),
+        backgroundColor: "#1db954",
+      },
+    ],
+  };
+
   return (
     <>
       <Particles
         className={styles.particles}
-        options={options}
+        options={particleOptions}
         init={particlesInit}
       />
       <div className={styles.firstContainer}>
+        <div
+          style={{
+            width: "40vw",
+            backgroundColor: "black",
+            opacity: 0.9,
+            padding: 20,
+            borderRadius: 20,
+          }}
+        >
+          <Bar options={chartOptions} data={chartData} />
+        </div>
         <div className={styles.innerContainer}>
           {items.map((item, index) => (
             <ListItem

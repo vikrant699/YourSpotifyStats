@@ -5,11 +5,15 @@
 
 .firstContainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-top: 12vh;
 }
 
 .innerContainer {
+  display: flex;
+  flex-direction: column;
   width: max-content;
   /* background-color: rgb(24, 24, 24); */
   padding: 10px;
