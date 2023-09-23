@@ -26,6 +26,7 @@ ChartJS.register(
 
 function YourTopSongs() {
   const apiEndpoint = "https://api.spotify.com/v1/me/top/tracks";
+  /* eslint-disable */
   const { items, loading, hasMore } = useTopItems(apiEndpoint);
   console.log(items);
 
@@ -76,15 +77,8 @@ function YourTopSongs() {
         init={particlesInit}
       />
       <div className={styles.firstContainer}>
-        <div
-          style={{
-            width: "40vw",
-            backgroundColor: "black",
-            opacity: 0.9,
-            padding: 20,
-            borderRadius: 20,
-          }}
-        >
+        <p className={styles.pageTitle}>You Top Tracks (past 6 months)</p>
+        <div className={styles.chartContainer}>
           <Bar options={chartOptions} data={chartData} />
         </div>
         <div className={styles.innerContainer}>

@@ -1,19 +1,28 @@
 import { useState, useRef, useEffect } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { NavLink } from "react-router-dom";
 import LoginButton from "../../components/LoginButton";
 import styles from "./NavigationMenu.module.css";
-import { RxHamburgerMenu } from "react-icons/rx";
 
 const NavigationMenu = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const ref = useRef();
 
   useEffect(() => {
+    if (navbarOpen) {
+      document.body.classList.add(styles.disableScroll);
+    } else {
+      document.body.classList.remove(styles.disableScroll);
+    }
+
     const handler = (event) => {
       if (navbarOpen && !ref?.current?.contains(event.target)) {
         setNavbarOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
+
     return () => {
       document.removeEventListener("mousedown", handler);
     };
@@ -36,7 +45,14 @@ const NavigationMenu = () => {
         >
           <ul>
             <li>Top Playlists</li>
-            <li>Top Songs</li>
+            <NavLink
+              to="/topSongs"
+              className={({ isActive }) => {
+                return isActive ? styles.selectedNavBarLi : styles.navBarLi;
+              }}
+            >
+              Top Songs
+            </NavLink>
             <li>Top Artists</li>
             <li>Top Whatever</li>
           </ul>
