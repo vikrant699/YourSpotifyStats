@@ -60,3 +60,19 @@
   z-index: 20;
   text-decoration: none;
 }
+
+.logoListItem {
+  text-align: center;
+  display: inline;
+  justify-content: center;
+  color: white;
+  margin: 36px;
+  z-index: 20;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.logo {
+  width: 100px;
+}

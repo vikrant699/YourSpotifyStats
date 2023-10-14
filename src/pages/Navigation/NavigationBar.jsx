@@ -1,10 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import LoginButton from "../../components/LoginButton";
 import styles from "./NavigationBar.module.css";
+import logo from "../../assets/images/logo.png";
 
 const NavigationBar = () => {
   return (
     <nav className={styles.navBar}>
+      <li className={styles.logoListItem}>
+        <Link to="/">
+          <img className={styles.logo} src={logo} />
+        </Link>
+      </li>
       <li className={styles.navBarLi}>Top Playlists</li>
       <NavLink
         to="/topSongs"

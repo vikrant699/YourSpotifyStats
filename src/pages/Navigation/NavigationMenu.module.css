@@ -32,7 +32,7 @@
   transition: all 0.3s ease-in;
   overflow: hidden;
   white-space: nowrap;
-  z-index: 10;
+  z-index: 21;
 }
 
 .navElementsActive {
@@ -69,4 +69,8 @@
 
 .navBarLi:hover {
   background-color: #1db954;
+}
+
+.logo {
+  width: 100px;
 }

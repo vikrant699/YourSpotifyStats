@@ -3,6 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
 import LoginButton from "../../components/LoginButton";
 import styles from "./NavigationMenu.module.css";
+import logo from "../../assets/images/logo.png";
 
 const NavigationMenu = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -44,6 +45,13 @@ const NavigationMenu = () => {
           }`}
         >
           <ul>
+            <NavLink
+              onClick={handleShowNavbar}
+              to="/"
+              className={styles.navBarLi}
+            >
+              <img className={styles.logo} src={logo} />
+            </NavLink>
             <li>Top Playlists</li>
             <NavLink
               onClick={handleShowNavbar}
