@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { authenticate } from "../store/store";
+import Particles from "react-particles";
+import { loadStarsPreset } from "tsparticles-preset-stars";
 
 function GlobalErrorBoundary({ children }) {
   const dispatch = useDispatch();
@@ -50,6 +52,7 @@ function GlobalErrorBoundary({ children }) {
           }
         }
       } else {
+        console.log("Setting auth to false");
         dispatch(authenticate(false));
         removeCookie("refresh_token");
         removeCookie("auth_token");
@@ -67,7 +70,29 @@ function GlobalErrorBoundary({ children }) {
     }
   }, [cookies, dispatch, auth]);
 
-  return <>{children}</>;
+  const particlesInit = useCallback(async (engine) => {
+    await loadStarsPreset(engine);
+  }, []);
+
+  const particleOptions = {
+    preset: "stars",
+    particles: {
+      number: {
+        value: window.innerWidth / 5,
+      },
+    },
+  };
+
+  return (
+    <>
+      <Particles
+        styles={{ zIndex: -100, position: "absolute" }}
+        options={particleOptions}
+        init={particlesInit}
+      />
+      {children}
+    </>
+  );
 }
 
 export default GlobalErrorBoundary;

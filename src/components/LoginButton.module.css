@@ -3,6 +3,10 @@
   color: white;
 }
 
+* {
+  z-index: 20;
+}
+
 @media (min-width: 1080px) {
   .loginBtn {
     user-select: none;
@@ -27,14 +31,14 @@
   }
 
   .mainContainer {
-    margin-top: 10.3vh;
+    margin-top: 65%;
     position: relative;
     display: flex;
     flex-direction: column;
   }
 
   .profileContainer {
-    width: 6vw;
+    min-width: 5vw;
     display: flex;
     color: #fff;
     background-color: #1db954;
@@ -53,14 +57,14 @@
   }
 
   .avatar {
-    width: 1.5vw;
+    width: 25px;
     vertical-align: middle;
     border-radius: 100%;
     margin-top: -2px;
   }
 
   .name {
-    margin-left: 0.5vw;
+    margin-left: 10px;
   }
 
   .content {
@@ -140,14 +144,14 @@
   }
 
   .mainContainer {
-    margin-top: 7.7vh;
+    margin-top: 60%;
     position: relative;
     display: flex;
     flex-direction: column;
   }
 
   .profileContainer {
-    width: 12.5vw;
+    min-width: 11vw;
     display: flex;
     color: #fff;
     background-color: #1db954;
@@ -166,14 +170,14 @@
   }
 
   .avatar {
-    width: 3vw;
+    width: 25px;
     vertical-align: middle;
     border-radius: 100%;
     margin-top: -2px;
   }
 
   .name {
-    margin-left: 0.5vw;
+    margin-left: 10px;
   }
 
   .content {
@@ -230,24 +234,18 @@
 /* MOBILE ONLY */
 
 @media (max-width: 767px) {
-  .mainContainer {
-    margin-top: 0.5vh;
-    width: 35vw;
-    user-select: none;
-  }
-
   .loginBtn {
     user-select: none;
     color: #fff;
     background-color: #1db954;
     font-size: 14px;
     border-radius: 20px;
-    padding: 14px 20px 12px;
+    padding: 18px 48px 16px;
     transition-property: background-color;
     transition-duration: 0.3s;
     border-width: 0;
-    width: 35vw;
     letter-spacing: 2px;
+    min-width: 160px;
     text-transform: uppercase;
     white-space: normal;
     cursor: pointer;
@@ -258,17 +256,21 @@
     background-color: #169241;
   }
 
-  .name {
-    margin: 2px 10px 0px;
+  .mainContainer {
+    margin-top: 58%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .profileContainer {
+    min-width: 100px;
     display: flex;
     color: #fff;
     background-color: #1db954;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 20px;
-    padding: 10px 10px 10px;
+    padding: 2px 10px 0px;
     transition-property: background-color;
     transition-duration: 0.3s;
     border-width: 0;
@@ -277,21 +279,50 @@
     white-space: normal;
     cursor: pointer;
     font-family: "Heavy";
-    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+  }
+
+  .avatar {
+    width: 25px;
+    vertical-align: middle;
+    border-radius: 100%;
+    margin-top: -2px;
+  }
+
+  .name {
+    margin-left: 10px;
+  }
+
+  .content {
+    display: flex;
+    width: 6vw;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 1;
+    list-style-type: none;
+    margin: 0;
+    background-color: black;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0;
   }
 
   .spotifyProfile,
   .logout {
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
   }
 
+  .spotifyProfile:hover,
   .spotifyProfile:active {
     background-color: #1db954;
   }
 
+  .logout:hover,
   .logout:active {
     background-color: red;
     border-bottom-left-radius: 20px;
@@ -299,39 +330,17 @@
   }
 
   .contentOpen {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    visibility: visible;
+    opacity: 1;
+    margin: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
   .profileContainerSelected {
     background-color: #169241;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-  }
-
-  .avatar {
-    margin-left: 10px;
-    max-width: 20%;
-    height: auto;
-    border-radius: 100%;
-  }
-
-  .content {
-    text-align: center;
-    display: none;
-    flex-direction: column;
-    list-style-type: none;
-    margin: 0;
-    background-color: black;
-    position: absolute;
-    width: 35vw;
-    align-items: center;
-    gap: 0;
-    padding: 2px 0px 0px;
-    opacity: 0;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
   }
 }
 

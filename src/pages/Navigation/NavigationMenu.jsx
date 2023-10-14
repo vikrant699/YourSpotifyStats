@@ -46,6 +46,7 @@ const NavigationMenu = () => {
           <ul>
             <li>Top Playlists</li>
             <NavLink
+              onClick={handleShowNavbar}
               to="/topSongs"
               className={({ isActive }) => {
                 return isActive ? styles.selectedNavBarLi : styles.navBarLi;

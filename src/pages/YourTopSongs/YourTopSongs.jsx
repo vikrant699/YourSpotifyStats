@@ -1,6 +1,6 @@
-import { useCallback } from "react";
-import Particles from "react-particles";
-import { loadStarsPreset } from "tsparticles-preset-stars";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,23 +25,14 @@ ChartJS.register(
 );
 
 function YourTopSongs() {
+  /* eslint-disable */
+  const [cookies, setCookie, removeCookie] = useCookies(["refresh_token"]);
+  const auth = useSelector((state) => state.auth.auth);
+
   const apiEndpoint = "https://api.spotify.com/v1/me/top/tracks";
   /* eslint-disable */
   const { items, loading, hasMore } = useTopItems(apiEndpoint);
   console.log(items);
-
-  const particlesInit = useCallback(async (engine) => {
-    await loadStarsPreset(engine);
-  }, []);
-
-  const particleOptions = {
-    preset: "stars",
-    particles: {
-      number: {
-        value: window.innerWidth / 5,
-      },
-    },
-  };
 
   const chartOptions = {
     responsive: true,
@@ -69,15 +60,17 @@ function YourTopSongs() {
     ],
   };
 
+  useEffect(() => {
+    console.log(auth);
+    if (!cookies.auth_token && !auth) {
+      throw new Error("You have not logged in yet :(");
+    }
+  }, [auth]);
+
   return (
     <>
-      <Particles
-        className={styles.particles}
-        options={particleOptions}
-        init={particlesInit}
-      />
       <div className={styles.firstContainer}>
-        <p className={styles.pageTitle}>You Top Tracks (past 6 months)</p>
+        <p className={styles.pageTitle}>Your Top Tracks (past 6 months)</p>
         <div className={styles.chartContainer}>
           <Bar options={chartOptions} data={chartData} />
         </div>

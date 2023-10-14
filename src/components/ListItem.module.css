@@ -23,6 +23,7 @@ a {
     height: 2vh;
     margin: 10px;
     border-radius: 20px;
+    z-index: 10;
   }
 
   .artistContainer {
@@ -82,6 +83,7 @@ a {
     height: 2vh;
     margin: 10px;
     border-radius: 20px;
+    z-index: 10;
   }
 
   .artistContainer {
@@ -141,6 +143,7 @@ a {
     height: 2vh;
     margin: 10px;
     border-radius: 20px;
+    z-index: 10;
   }
 
   .artistContainer {

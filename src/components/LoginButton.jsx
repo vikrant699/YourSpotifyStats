@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginHelper } from "../helpers/SpotifyLogin";
 import styles from "./LoginButton.module.css";
 import { authenticate } from "../store/store";
@@ -11,6 +12,7 @@ const LoginButton = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const navigate = useNavigate();
   const ref = useRef();
   /* eslint-disable */
   const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
@@ -105,6 +107,7 @@ const LoginButton = () => {
     dispatch(authenticate(false));
     removeCookie("refresh_token");
     removeCookie("auth_token");
+    navigate("/");
   };
 
   const handleHover = () => {

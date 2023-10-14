@@ -1,0 +1,12 @@
+.loginPageContainer {
+  height: 92vh;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.lottieContainer {
+  width: 100px;
+}

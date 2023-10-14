@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Hero.module.css";
 import Lottie from "lottie-react";
-import animation from "../../assets/animations/animation4.json";
+import animation from "../../assets/animations/spotifyAnimation.json";
 
 const Hero = () => {
   const [showBorder, setShowBorder] = useState(true);
