@@ -5,21 +5,25 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  z-index: 21;
 }
 
 .disableScroll {
   overflow: hidden;
+  z-index: 21;
 }
 
 .navbar {
   height: 8vh;
   background-color: rgba(0, 0, 0, 0.9);
   position: relative;
+  z-index: 21;
 }
 
 .menuIcon {
   display: block;
   cursor: pointer;
+  z-index: 21;
 }
 
 .navElements {
@@ -37,21 +41,25 @@
 
 .navElementsActive {
   width: 270px;
+  z-index: 21;
 }
 
 .navElements ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
+  z-index: 21;
 }
 
 .navElements ul li {
   margin-top: 22px;
   padding: 8px 16px 8px;
+  z-index: 21;
 }
 
 .selectedNavBarLi {
   padding: 8px 16px 8px;
+  z-index: 21;
   margin-top: 22px;
   background-color: #1db954;
   padding: 8px 16px 8px;
@@ -62,6 +70,7 @@
 .navBarLi {
   text-decoration: none;
   padding: 8px 16px 8px;
+  z-index: 21;
   margin-top: 22px;
   border-radius: 12px;
   margin-right: 22px;
@@ -73,4 +82,5 @@
 
 .logo {
   width: 100px;
+  z-index: 21;
 }

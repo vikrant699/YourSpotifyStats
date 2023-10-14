@@ -13,9 +13,9 @@ const ErrorPage = () => {
 
   return (
     <>
-      {window.innerWidth > 768 ? <NavigationBar /> : <NavigationMenu />}
+      {window.innerWidth > 830 ? <NavigationBar /> : <NavigationMenu />}
       <div className={styles.loginPageContainer}>
-        <h1>{text}</h1>
+        <p>{text}</p>
         <div className={styles.lottieContainer}>
           <Lottie animationData={animation} autoplay loop />
         </div>
