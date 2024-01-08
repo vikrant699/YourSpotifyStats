@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 
-function useTopItems(apiEndpoint) {
+function useTopItems(apiEndpoint, isTrack) {
   const [items, setItems] = useState([]);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [followedArtists, setFollowedArtists] = useState([]);
   /* eslint-disable */
   const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
   const authToken = cookies.auth_token;
@@ -26,21 +27,41 @@ function useTopItems(apiEndpoint) {
       const data = await response.json();
       const newItems = await data.items;
 
+      if (!isTrack) {
+        const followingResponse = await fetch(
+          `https://api.spotify.com/v1/me/following?type=artist&limit=20&offset=${offset}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        const followingData = await followingResponse.json();
+        const followingNewItems = await followingData.artists.items.map(
+          (item) => item.id
+        );
+
+        if (newItems.length !== 0) {
+          setFollowedArtists([...followedArtists, ...followingNewItems]);
+        }
+      }
+
       if (newItems.length === 0) {
         setHasMore(false); // No more items to fetch
       } else {
-        setItems([...items, ...newItems]);
-        setOffset(offset + 20);
+        setItems((prevItems) => [...prevItems, ...newItems]);
+        setOffset((prevOffset) => prevOffset + 20);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
     setLoading(false);
-  }, [offset, items]);
+  }, [apiEndpoint, authToken, offset, items, isTrack]);
 
   useEffect(() => {
     fetchItems();
-  }, [fetchItems]);
+  }, [apiEndpoint, fetchItems]);
 
   const handleScroll = useCallback(() => {
     if (
@@ -65,7 +86,7 @@ function useTopItems(apiEndpoint) {
     };
   }, [loading, hasMore, handleScroll]);
 
-  return { items, loading, hasMore };
+  return { items, loading, hasMore, followedArtists };
 }
 
 export default useTopItems;

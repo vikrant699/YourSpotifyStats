@@ -11,7 +11,6 @@ const NavigationBar = () => {
           <img className={styles.logo} src={logo} />
         </Link>
       </li>
-      <li className={styles.navBarLi}>Top Playlists</li>
       <NavLink
         to="/topSongs"
         className={({ isActive }) => {
@@ -20,8 +19,14 @@ const NavigationBar = () => {
       >
         Top Songs
       </NavLink>
-      <li className={styles.navBarLi}>Top Artists</li>
-      <li className={styles.navBarLi}>Top Whatever</li>
+      <NavLink
+        to="/topArtists"
+        className={({ isActive }) => {
+          return isActive ? styles.navLinkActive : styles.navBarLi;
+        }}
+      >
+        Top Artists
+      </NavLink>
       <li className={styles.navBarLogin}>
         <LoginButton />
       </li>

@@ -34,6 +34,8 @@ export const loginHelper = async () => {
     "user-read-currently-playing",
     "user-read-recently-played",
     "user-top-read",
+    "user-follow-modify",
+    "user-follow-read",
   ];
 
   localStorage.setItem("code_verifier", codeVerifier);

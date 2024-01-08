@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navigation from "./pages/Navigation/Navigation";
 import HomePage from "./pages/HomePage/HomePage";
-import YourTopSongs from "./pages/YourTopSongs/YourTopSongs";
+import YourTopStuff from "./pages/YourTopStuff/YourTopStuff";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
@@ -16,7 +16,31 @@ const router = createBrowserRouter([
       },
       {
         path: "topSongs",
-        element: <YourTopSongs />,
+        element: (
+          <YourTopStuff
+            key="tracks"
+            title="Your Top Tracks (past 6 months)"
+            apiEndpoint="https://api.spotify.com/v1/me/top/tracks"
+            chartLegend="Populatity of Top 10 Tracks"
+            datasetLabel="Track's Popularity"
+            showChart={true}
+            isTrack={true}
+          />
+        ),
+      },
+      {
+        path: "topArtists",
+        element: (
+          <YourTopStuff
+            key="artists"
+            title="Your Top Artists (past 6 months)"
+            apiEndpoint="https://api.spotify.com/v1/me/top/artists"
+            chartLegend="Populatity of Top 10 Artists"
+            datasetLabel="Artist's Popularity"
+            showChart={true}
+            isTrack={false}
+          />
+        ),
       },
     ],
   },

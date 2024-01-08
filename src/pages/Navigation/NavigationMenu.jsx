@@ -52,7 +52,6 @@ const NavigationMenu = () => {
             >
               <img className={styles.logo} src={logo} />
             </NavLink>
-            <li>Top Playlists</li>
             <NavLink
               onClick={handleShowNavbar}
               to="/topSongs"
@@ -62,8 +61,15 @@ const NavigationMenu = () => {
             >
               Top Songs
             </NavLink>
-            <li>Top Artists</li>
-            <li>Top Whatever</li>
+            <NavLink
+              onClick={handleShowNavbar}
+              to="/topArtists"
+              className={({ isActive }) => {
+                return isActive ? styles.selectedNavBarLi : styles.navBarLi;
+              }}
+            >
+              Top Artists
+            </NavLink>
           </ul>
         </div>
         <div className="logo">

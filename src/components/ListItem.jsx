@@ -12,10 +12,16 @@ const ListItem = ({
   imgSrc,
   previewUrl,
   isTrack,
+  artistID,
+  authToken,
+  followedArtists,
 }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(
+    followedArtists.includes(artistID)
+  );
 
   const handlePlayPauseClick = () => {
     if (!audioRef.current) return;
@@ -55,6 +61,28 @@ const ListItem = ({
     };
   }, []);
 
+  const followArtist = async () => {
+    try {
+      const api = `https://api.spotify.com/v1/me/following?type=artist&ids=${artistID}`;
+      const response = await fetch(api, {
+        method: isFollowed ? "DELETE" : "PUT",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = response.json();
+      if (data && !isFollowed) {
+        setIsFollowed(true);
+      } else {
+        setIsFollowed(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className={styles.listItemContainer}>
       <div className={styles.infoContainer}>
@@ -64,17 +92,26 @@ const ListItem = ({
 
         <div>
           <a href={musicLink}>
-            <p className={styles.name}>{name}</p>
+            <p
+              className={styles.name}
+              style={{ marginBottom: isTrack ? "3px" : "15px" }}
+            >
+              {name}
+            </p>
           </a>
-          <div className={styles.artistContainer}>
-            {artists.map((artist, index) => (
-              <a href={artist.external_urls.spotify} key={index}>
-                <p className={styles.artist}>
-                  {index < artists.length - 1 ? `${artist.name},` : artist.name}
-                </p>
-              </a>
-            ))}
-          </div>
+          {isTrack && (
+            <div className={styles.artistContainer}>
+              {artists.map((artist, index) => (
+                <a href={artist.external_urls.spotify} key={index}>
+                  <p className={styles.artist}>
+                    {index < artists.length - 1
+                      ? `${artist.name},`
+                      : artist.name}
+                  </p>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       {isTrack ? (
@@ -98,8 +135,20 @@ const ListItem = ({
           )}
           <audio ref={audioRef} src={previewUrl} onEnded={handleAudioEnded} />
         </div>
+      ) : isFollowed ? (
+        <button
+          className={`${styles.artistButton} ${styles.unfollowButton}`}
+          onClick={followArtist}
+        >
+          Unfollow
+        </button>
       ) : (
-        <button>Test Button</button>
+        <button
+          className={`${styles.artistButton} ${styles.followButton}`}
+          onClick={followArtist}
+        >
+          Follow
+        </button>
       )}
     </div>
   );
